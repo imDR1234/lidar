@@ -3,12 +3,9 @@
 # Configuration {{{1
 
 # Nom des exécutables à créer
-TEST=bottest
+
 MAIN=main
 ACTION=action
-CODEURSERIE = codeurSerie
-ASSERVT = asservt
-AX12 = AX12
 
 # Dossiers sources
 SRC_DIR:=src
@@ -61,32 +58,14 @@ OBJS:=$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
 # Règles de construction {{{1
 
 # Règle appelée avec 'make': on reconstruit asserv
-all: $(MAIN) $(CODEURSERIE) $(TEST) $(ASSERVT) $(ACTION) $(AX12)
+all: $(MAIN) 
 
 
-# Construction du programme action
-$(ACTION): $(OBJS) $(OBJ_DIR_MAIN)/action.o
-	$(CXX) $(LDFLAGS) $^ -o $@
-	
-# Construction du programme asservt
-$(ASSERVT): $(OBJS) $(OBJ_DIR_MAIN)/asservt.o
-	$(CXX) $(LDFLAGS) $^ -o $@	
 
-# Construction du programme AX12
-$(AX12): $(OBJS) $(OBJ_DIR_MAIN)/AX12.o
-	$(CXX) $(LDFLAGS) $^ -o $@	
-	
 # Construction du programme principal
 $(MAIN): $(OBJS) $(OBJ_DIR_MAIN)/main.o
 	$(CXX) $(LDFLAGS) $^ -o $@
 
-# Construction du programme de bottest
-$(TEST): $(OBJS) $(OBJ_DIR_MAIN)/bottest.o
-	$(CXX) $(LDFLAGS) $^ -o $@
-
-# Construction du programme de codeurSerie
-$(CODEURSERIE): $(OBJS) $(OBJ_DIR_MAIN)/codeurSerie.o
-	$(CXX) $(LDFLAGS) $^ -o $@
 
 # Règle de fabrication des fichiers objets communs
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -98,7 +77,7 @@ $(OBJ_DIR)/main/%.o: $(SRC_DIR)/main/%.cpp
 
 # Nettoyage
 clean:
-	rm -rf $(BUILD_DIR) $(TEST) $(MAIN) $(CODEURSERIE) $(ASSERVT) $(ACTION) $(AX12)
+	rm -rf  $(MAIN) 
 
 # Compilation de wiringPi en cross
 wiringpi:
